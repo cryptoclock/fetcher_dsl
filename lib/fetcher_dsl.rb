@@ -1,5 +1,10 @@
 require "fetcher_dsl/version"
+require "fetcher_dsl/fetcher"
+
+require 'redis'
 
 module FetcherDsl
-  # Your code goes here...
+  def self.define(&block)
+    Fetcher.new(&block)
+  end
 end

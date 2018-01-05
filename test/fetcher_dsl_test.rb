@@ -6,6 +6,10 @@ class FetcherDslTest < Minitest::Test
   end
 
   def test_it_does_something_useful
-    assert false
+    @fetcher = FetcherDsl.define {
+      name "acme"
+    }
+    assert_equal FetcherDsl::Fetcher, @fetcher.class
+    assert_equal "acme", @fetcher.name
   end
 end
