@@ -6,6 +6,7 @@ module FetcherDsl
 
     def initialize(&block)
       @publisher = Redis.new(host:"redis")
+      @period=0
       instance_eval(&block)
     end
 

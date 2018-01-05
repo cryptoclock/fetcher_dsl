@@ -12,4 +12,12 @@ class FetcherDslTest < Minitest::Test
     assert_equal FetcherDsl::Fetcher, @fetcher.class
     assert_equal "acme", @fetcher.name
   end
+
+  def test_it_sets_default_delay
+    @fetcher = FetcherDsl.define {
+      name "acme"
+    }
+    assert_equal FetcherDsl::Fetcher, @fetcher.class
+    assert_equal 0, @fetcher.period
+  end
 end
