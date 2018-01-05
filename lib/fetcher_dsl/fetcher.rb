@@ -24,7 +24,7 @@ module FetcherDsl
     end
 
     def publish(keys,value)
-      @publisher.publish ["fetcher",@name,keys].flatten.join("_").downcase, value
+      @publisher.publish channel_name(keys), value
     end
 
     def delay(value)
@@ -37,6 +37,14 @@ module FetcherDsl
         @publisher.hmset("fetcher_next_run", @name, (Time.now+period).to_i)
         sleep(@period)
       }
+    end
+
+    private
+    def channel_name(keys)
+      unless keys.kind_of?(Array)
+        keys=keys.scan(/.{3}/) if keys.length==6
+      end
+      ["fetcher",@name,keys].flatten.join("_").downcase
     end
   end
 end
