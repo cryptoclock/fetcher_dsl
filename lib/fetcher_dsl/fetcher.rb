@@ -44,7 +44,7 @@ module FetcherDsl
       unless keys.kind_of?(Array)
         keys=keys.scan(/.{3}/) if keys.length==6
       end
-      ["fetcher",@name,keys].flatten.join("_").downcase
+      ["cryptoclock","ticker",[@name,keys].flatten.join("_")].join(":").downcase
     end
   end
 end
